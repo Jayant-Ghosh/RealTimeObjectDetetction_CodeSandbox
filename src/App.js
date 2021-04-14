@@ -7,15 +7,15 @@ import "./App.css";
 import { drawRectangle } from "./utilities";
 import { Camera } from "react-cam";
 
+// Main function for Application
 function App() {
   const webcamref = useRef(null);
   const canvasref = useRef(null);
 
-  // Main function
   const runCoco = async () => {
     const net = await cocossd.load();
     console.log("Detection for Realtime Objects ");
-    //  Loop and detect hands
+    //  Loop and detect objects for realtime
     setInterval(() => {
       detect(net);
     }, 10);
@@ -27,31 +27,25 @@ function App() {
       webcamref.current !== null &&
       webcamref.current.video.readyState === 4
     ) {
-      // Get Video Properties
+      // Get Video Properties for Video WebCamera
       const video = webcamref.current.video;
       const videoWidth = webcamref.current.video.videoWidth;
       const videoHeight = webcamref.current.video.videoHeight;
 
-      // Set video width
-      //Change
+      // Set video width and height for webcam
+
       webcamref.current.video.width = videoWidth;
       webcamref.current.video.height = videoHeight;
-      //Change END
 
-      //CHANGE
-
-      // Set canvas height and width
+      // Set canvas height and width for video
       canvasref.current.width = videoWidth;
       canvasref.current.height = videoHeight;
-      //CHANGE END
 
-      //CHANGE
-      //CHANGE END
       // Make Detections
       const obj = await net.detect(video);
       console.log(obj);
 
-      // Draw mesh
+      // Draw mesh for Rectangle
       const ctx = canvasref.current.getContext("2d");
       drawRectangle(obj, ctx);
     }
