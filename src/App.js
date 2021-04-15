@@ -1,11 +1,11 @@
 // Import dependencies
-import React, { useRef, useState, useEffect, Fragment } from "react";
-import * as tf from "@tensorflow/tfjs";
+import React, { useRef } from "react";
+//import * as tf from "@tensorflow/tfjs";
 import * as cocossd from "@tensorflow-models/coco-ssd";
 import WebCam from "react-webcam";
 import "./App.css";
 import { drawRectangle } from "./utilities";
-import { Camera } from "react-cam";
+import "react-cam";
 
 // Main function for Application
 function App() {
@@ -51,9 +51,7 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    runCoco();
-  }, []);
+  runCoco();
 
   return (
     <div className="App">
